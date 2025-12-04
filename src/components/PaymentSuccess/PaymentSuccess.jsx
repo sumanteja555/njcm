@@ -22,10 +22,39 @@ const PaymentSuccess = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-    // Here you can add logic to send the data to the backend, e.g., via fetch to prayer_request.php
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/payment_details.php`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        alert("Details submitted successfully!");
+        // Reset form or navigate
+        setFormData({
+          fullName: "",
+          mobile: "",
+          email: "",
+          address: "",
+          prayerRequest: "",
+        });
+      } else {
+        alert("Failed to submit: " + (data.error || "Unknown error"));
+      }
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
   };
 
   if (showMessage) {
