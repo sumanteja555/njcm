@@ -10,6 +10,9 @@ define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'njcm');
 
+// JWT Secret for token signing
+define('JWT_SECRET', 'your-secret-key-here-change-in-production');
+
 // Create database connection
 function getConnection() {
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -21,6 +24,19 @@ function getConnection() {
     
     $conn->set_charset('utf8mb4');
     return $conn;
+}
+
+// Generate JWT token
+function generateJWT($payload) {
+    $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+    $headerEncoded = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
+    
+    $payloadEncoded = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode(json_encode($payload)));
+    
+    $signature = hash_hmac('sha256', $headerEncoded . "." . $payloadEncoded, JWT_SECRET, true);
+    $signatureEncoded = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+    
+    return $headerEncoded . "." . $payloadEncoded . "." . $signatureEncoded;
 }
 
 // Enable CORS for development
