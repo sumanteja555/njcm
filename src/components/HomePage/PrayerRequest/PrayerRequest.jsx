@@ -1,7 +1,14 @@
 import styles from "./PrayerRequest.module.css";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
+
 export default function PrayerRequest() {
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
   const slideUp = {
     hide: { opacity: 0, y: 45 },
     show: { opacity: 1, y: 0 },
@@ -11,27 +18,57 @@ export default function PrayerRequest() {
     e.preventDefault();
 
     try {
-      const response = await fetch("/sendEmail.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userName, number, message }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/prayer_request.php`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userName: name, number: mobile, message }),
+        }
+      );
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setSubmitted(true);
-        // Reset form fields if needed
+        // Reset form fields
         setName("");
         setMobile("");
         setMessage("");
       } else {
-        console.error("Failed to send email.");
+        alert("Failed to submit: " + (data.error || "Unknown error"));
       }
     } catch (error) {
-      console.error("Error sending email:", error);
+      alert("Error: " + error.message);
     }
   }
+
+  if (submitted) {
+    return (
+      <motion.div
+        className={styles.container}
+        variants={slideUp}
+        initial="hide"
+        whileInView="show"
+        transition={{ duration: 3 }}
+      >
+        <h1>Prayer Request Submitted!</h1>
+        <p>
+          Thank you for sharing your prayer request. We will keep you in our
+          prayers.
+        </p>
+        <button
+          onClick={() => setSubmitted(false)}
+          className={styles.submitAnother}
+        >
+          Submit Another Request
+        </button>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       className={styles.container}
@@ -47,12 +84,17 @@ export default function PrayerRequest() {
             type="text"
             placeholder="Enter your name"
             className={styles.input}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             name="userName"
+            required
           />
           <input
-            type="number"
-            placeholder="Mobile Number(Optional)"
+            type="tel"
+            placeholder="Mobile Number (Optional)"
             className={styles.input}
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
             name="number"
           />
         </div>
@@ -62,8 +104,11 @@ export default function PrayerRequest() {
             cols="20"
             rows="5"
             className={styles.textarea}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             name="message"
             placeholder="Share your prayer request with us..."
+            required
           ></textarea>
         </div>
         <input type="submit" value="Submit" id={styles.submit} />

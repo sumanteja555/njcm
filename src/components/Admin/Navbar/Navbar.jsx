@@ -1,12 +1,21 @@
 import styles from "./Navbar.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 export default function AdminNavbar() {
   const check = useRef();
+  const navigate = useNavigate();
 
   function handleClick() {
     check.current.checked = false;
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("adminEmail");
+    localStorage.removeItem("adminData");
+    navigate("/admin/signin");
+    handleClick(); // Close mobile menu
   }
 
   return (
@@ -22,6 +31,7 @@ export default function AdminNavbar() {
           <NavLink
             className={({ isActive }) => (isActive ? styles.active : styles.li)}
             to="/admin"
+            end
             onClick={handleClick}
           >
             Dashboard
@@ -33,6 +43,9 @@ export default function AdminNavbar() {
           >
             Add Event
           </NavLink>
+          <button className={styles.logoutBtn} onClick={handleLogout}>
+            Logout
+          </button>
         </div>
         <h1 className={styles.logo}>NJCM</h1>
       </div>

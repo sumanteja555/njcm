@@ -11,16 +11,25 @@ const Gallery = lazy(() => import("../components/Gallery/Gallery.jsx"));
 const Donate = lazy(() => import("../components/Donate/Donate.jsx"));
 
 const Error = lazy(() => import("../components/Error/Error.jsx"));
+
+const PaymentSuccess = lazy(() =>
+  import("../components/PaymentSuccess/PaymentSuccess.jsx")
+);
 const UserRoutes = {
   path: "/",
   element: <RootLayout />,
-  errorElement: <Error />,
+  // errorElement: <Error />,
   children: [
     { index: true, element: <HomePage /> },
     { path: "/aboutus", element: <AboutUs /> },
     { path: "/missionvission", element: <MissionVission /> },
     { path: "/gallery", element: <Gallery /> },
     { path: "/donate", element: <Donate /> },
+    {
+      path: "/paymentsuccess",
+      element: <PaymentSuccess />,
+    },
+    { path: "*", element: <Error /> },
   ],
 };
 

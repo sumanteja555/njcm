@@ -22,3 +22,23 @@ main {
   margin-bottom: 5rem;
   scroll-behavior: smooth;
 }
+
+/* PayPal modal styles to prevent overlap with footer */
+.paypal-checkout-overlay,
+.paypal-overlay,
+.paypal-checkout-modal,
+.paypal-modal,
+.zoid-modal {
+  z-index: 999999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.paypal-checkout-modal iframe,
+.paypal-modal iframe,
+.zoid-modal iframe {
+  z-index: 1000000 !important;
+}

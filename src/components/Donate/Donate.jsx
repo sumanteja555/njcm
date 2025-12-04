@@ -1,23 +1,25 @@
-import { loadScript } from "@paypal/paypal-js";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import styles from "./Donate.module.css";
 
-export default function Donate() {
-  loadScript({
-    "client-id":
-      "Ae6uokzck9jINxn9UYjAqys6-rkOoSX4fgCmAeJm5_0HR1LO7uCIFOBvkQ4Zraxut3sRZMY2TxyurVJ5",
-  })
-    .then((paypal) => {
-      console.log("success");
-    })
-    .catch((err) => {
-      console.error("failed to load the PayPal JS SDK script", err);
-    });
+const Donate = () => {
   return (
-    <PayPalScriptProvider
-      options={{
-        "client-id":
-          "Ae6uokzck9jINxn9UYjAqys6-rkOoSX4fgCmAeJm5_0HR1LO7uCIFOBvkQ4Zraxut3sRZMY2TxyurVJ5",
-      }}
-    />
+    <div className={styles.container}>
+      <h2 className={styles.title}>Donate</h2>
+      <p className={styles.message}>
+        Click below link to donate to New Jerusalem Covenant Ministries
+      </p>
+      <a
+        href="https://www.paypal.com/ncp/payment/NCXYLVA9GQ5W4"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.donateButton}
+      >
+        Donate Now
+      </a>
+      <p className={styles.warning}>
+        After clicking this button you will be redirected to another page
+      </p>
+    </div>
   );
-}
+};
+
+export default Donate;

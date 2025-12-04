@@ -8,7 +8,7 @@ import CopyrightIcon from "@mui/icons-material/Copyright";
 export default function Footer() {
   return (
     <>
-      <div id={classes.container}>
+      <div id={classes.container} className="global-footer">
         <div id={classes.subContainer}>
           <div id={classes.copyright}>
             2024
