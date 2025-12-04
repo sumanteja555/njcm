@@ -1,0 +1,232 @@
+.container {
+  max-width: 80vw;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+.coverImg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+/* Founder styles */
+.founderContainer {
+  background: black;
+  margin: 3rem auto;
+  width: 80vw;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.infoContainer p:first-child {
+  font-size: xx-large;
+  text-align: center;
+  color: var(--secondaryColor);
+}
+.founderInfo {
+  text-align: justify;
+  padding: 0 2rem;
+  line-height: 150%;
+  font-size: large;
+}
+#founderImgContainer {
+  display: flex;
+  align-items: center;
+}
+#founderImgContainer img {
+  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+/* family container */
+.familyContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 3rem;
+}
+
+.familyContainer div:not(:nth-child(2)) p {
+  font-size: clamp(1rem, 8vw, 2rem);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  padding-top: 1rem;
+  text-wrap: wrap;
+}
+
+.familyContainer div:nth-child(2) {
+  font-size: clamp(0.7rem, 5vw, 1.5rem);
+  text-align: justify;
+  padding: 0 1rem;
+  margin: auto 0;
+}
+.familyContainer img {
+  max-width: 100%;
+}
+/* co-founder */
+.coFounderContainer img {
+  height: 90vh;
+  margin-right: 2rem;
+  float: left;
+}
+
+.coFounderInfo h1 {
+  text-align: center;
+  font-size: clamp(1rem, 10vw, 2.5rem);
+  color: var(--primaryColor);
+}
+
+.coFounderInfoText span {
+  font-size: larger;
+  font-weight: bold;
+}
+.coFounderInfoText {
+  line-height: 150%;
+  text-align: justify;
+  text-wrap: wrap;
+  font-size: large;
+}
+.heading {
+  text-align: center;
+  font-size: clamp(1.5rem, 13vw, 2.5rem);
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--primaryColor);
+}
+
+/* ministries journey */
+.subHeading {
+  font-weight: bold;
+  font-size: larger;
+  margin-bottom: 1rem;
+}
+.journeyText {
+  text-align: justify;
+  line-height: 200%;
+  font-size: large;
+  letter-spacing: 2%;
+}
+
+/* Gods Sevants */
+.godServantsContainer {
+  margin-bottom: 5rem;
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+.article {
+  max-width: 320px;
+  position: relative;
+  display: block;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.pastorImg {
+  max-width: 100%;
+  transform-origin: center;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out;
+  border-radius: 16px 16px 0 0;
+}
+.article:hover .pastorImg {
+  transform: scale(1.2);
+}
+
+.h2 {
+  font-size: 2rem;
+  text-align: center;
+  font-family: "Crimson Pro", serif;
+}
+
+.article:hover .h2 {
+  position: relative;
+  top: 0.5rem;
+  transition: all 1s ease-in-out;
+}
+
+/* media queries */
+@media screen and (max-width: 768px) {
+  /* Founder container */
+  .founderContainer {
+    grid-template-columns: 1fr;
+  }
+
+  #founderImgContainer {
+    order: -1;
+    max-width: 50vw;
+    margin: 0 auto;
+  }
+  /* family container */
+  .familyContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .familyContainer div:nth-child(2) {
+    padding-bottom: 1rem;
+  }
+  /* gods servants */
+  .articles {
+    grid-template-columns: 1fr;
+  }
+  .pastorImg {
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  /* founder styles */
+  .founderInfo {
+    font-size: initial;
+  }
+  /* cofounder */
+  .coFounderContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+  }
+  .coFounderContainer img {
+    margin: 0;
+    height: 30vh;
+    aspect-ratio: 1.1/1;
+  }
+  .coFounderContainer h1 {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+
+  .coFounderInfoText {
+    position: relative;
+    left: -10px;
+  }
+
+  /* ministries journey */
+  .subHeading {
+    text-align: center;
+  }
+
+  /* gods servants styles */
+
+  .godServantsContainer {
+    margin-bottom: 10rem;
+  }
+  .pastorImg {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    height: auto;
+    aspect-ratio: initial;
+  }
+}

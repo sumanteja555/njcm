@@ -1,0 +1,28 @@
+.mainContainer {
+  width: 70vw;
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.container {
+  /* background-color: red; */
+  height: 50vh;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+}
+
+.imgContainer {
+  width: 5rem;
+}
+
+.imgContainer img {
+  object-fit: contain;
+}
+
+.container h1 {
+  color: #1a2980;
+}
